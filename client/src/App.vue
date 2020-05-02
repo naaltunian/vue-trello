@@ -12,17 +12,21 @@
 </template>
 
 <script>
-
+import { mapActions } from 'vuex';
 export default {
   name: 'App',
   data: () => ({
     fixed: false
   }),
-  // mounted() {
-
-  // },
-  // methods: {
-
-  // }
+  mounted() {
+    // TODO: refresh token instead
+    if (localStorage.token) {
+      this.loginAction();
+      this.$router.push('/boards');
+    }
+  },
+  methods: {
+    ...mapActions(['loginAction'])
+  }
 };
 </script>
