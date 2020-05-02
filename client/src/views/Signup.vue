@@ -45,7 +45,7 @@
 </template>
 
 <script>
-const url = "http://localhost:5000/users"
+const url = "http://localhost:5000/users/signup"
 export default {
     name: "signup",
     data: () => ({
