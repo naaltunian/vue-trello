@@ -23,7 +23,6 @@ router.get('/:id', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    console.log("body", username, password)
     const user = await User.findOne({ username });
     if (!user) {
         res.status(422);
