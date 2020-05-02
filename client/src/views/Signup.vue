@@ -45,7 +45,9 @@
 </template>
 
 <script>
-const url = "http://localhost:5000/users/signup"
+import { mapActions } from 'vuex';
+const url = "http://localhost:5000/users/signup";
+
 export default {
     name: "signup",
     data: () => ({
@@ -59,6 +61,7 @@ export default {
         confirmPassword: ''
     }),
     methods: {
+        ...mapActions(['loginAction']),
         async createUser() {
             this.errorMessage = '';
             this.loading = true;
@@ -67,22 +70,24 @@ export default {
                 this.errorMessage = 'Password and Confirm Password do not match';
                 return;
             }
-            const response = await fetch(url, {
+            const data = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
                 },
                 body: JSON.stringify(this.user)
             });
-            const data = await response.json();
+            const response = await data.json();
+            
             if (data.message) {
                 this.loading = false;
                 this.errorMessage = data.message;
                 return;
             }
-            localStorage.token = data;
+
+            localStorage.token = response.token;
             this.loading = false;
-            this.$router.push('/');
+            this.$router.push('/boards');
         }
     }
 }

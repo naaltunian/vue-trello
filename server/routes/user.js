@@ -41,7 +41,7 @@ router.post('/login', async (req, res) => {
         username: user.username
     }
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.json(token);
+    res.json({ token, username: user.username });
 });
 
 router.post('/signup', async (req, res) => {
@@ -63,7 +63,7 @@ router.post('/signup', async (req, res) => {
         username: user.username
     }
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.json(token);
+    res.json({ token, username: user.username });
 });
 
 module.exports = router;

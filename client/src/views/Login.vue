@@ -31,7 +31,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 const url = 'http://localhost:5000/users/login';
+
 export default {
     name: 'login',
     data: () => ({
@@ -43,6 +45,7 @@ export default {
         }
     }),
     methods: {
+        ...mapActions(['loginAction']),
         async login() {
             this.errorMessage = '';
             this.loading = true;
@@ -60,9 +63,11 @@ export default {
                 this.errorMessage = response.message;
                 return;
             }
-
-            localStorage.token = response;
+            
+            localStorage.token = response.token;
+            this.loginAction(response.username);
             this.loading = false;
+            this.$router.push('/boards');
         }
     }
 }

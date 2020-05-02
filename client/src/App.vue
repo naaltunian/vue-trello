@@ -18,5 +18,11 @@ export default {
   data: () => ({
     fixed: false
   }),
+  // mounted() {
+
+  // },
+  // methods: {
+
+  // }
 };
 </script>
