@@ -5,6 +5,11 @@
                 <v-alert v-if="errorMessage" type="error">
                     {{ errorMessage }}
                 </v-alert>
+                <v-progress-circular
+                    v-if="loading"
+                    indeterminate
+                    color="primary"
+                ></v-progress-circular>
                 <v-form @submit.prevent="createUser">
                     <v-text-field
                         v-model="user.username"
@@ -44,6 +49,7 @@ const url = "http://localhost:5000/users"
 export default {
     name: "signup",
     data: () => ({
+        loading: false,
         errorMessage: '',
         user: {
             username: '',
@@ -54,8 +60,12 @@ export default {
     }),
     methods: {
         async createUser() {
+            this.errorMessage = '';
+            this.loading = true;
             if (this.user.password !== this.confirmPassword) {
+                this.loading = false;
                 this.errorMessage = 'Password and Confirm Password do not match';
+                return;
             }
             const response = await fetch(url, {
                 method: 'POST',
@@ -65,13 +75,14 @@ export default {
                 body: JSON.stringify(this.user)
             });
             const data = await response.json();
-            console.log(data);
             if (data.message) {
+                this.loading = false;
                 this.errorMessage = data.message;
                 return;
             }
             localStorage.token = data;
-            this.errorMessage = '';
+            this.loading = false;
+            this.$router.push('/');
         }
     }
 }
