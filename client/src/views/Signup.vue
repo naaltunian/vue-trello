@@ -85,7 +85,8 @@ export default {
                 return;
             }
 
-            localStorage.token = response.token;
+            localStorage.token = response;
+            this.loginAction();
             this.loading = false;
             this.$router.push('/boards');
         }

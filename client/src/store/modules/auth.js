@@ -1,16 +1,14 @@
 const state = {
     isLoggedIn: false,
-    username: null
 }
 
 const getters = {
-    isLoggedIn: (state) => state.isLoggedIn,
-    username: (state) => state.username
+    isLoggedIn: (state) => state.isLoggedIn
 }
 
 const actions = {
-    loginAction: ({ commit }, username) => {
-        commit('login', username);
+    loginAction: ({ commit }) => {
+        commit('login');
     },
     logoutAction: ({ commit }) => {
         commit('logout');
@@ -18,14 +16,12 @@ const actions = {
 }
 
 const mutations = {
-    login: (state, username) => {
+    login: (state) => {
         state.isLoggedIn = true;
-        state.username = username;
     },
     logout: (state) => {
         localStorage.removeItem('token');
         state.isLoggedIn = false;
-        state.username = null;
     }
 }
 
