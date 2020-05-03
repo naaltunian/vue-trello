@@ -1,6 +1,18 @@
 <template>
   <v-app>
     <v-app-bar app>
+      <router-link style="text-decoration: none; color: inherit;" to="/">
+        <v-app-bar-title>Trello</v-app-bar-title>
+      </router-link>
+      <v-spacer></v-spacer>
+      <v-app-bar-items v-if="!isLoggedIn">
+        <v-btn :to="{ name: 'signup'}">Go Signup</v-btn>
+        <v-btn :to="{ name: 'login'}">Go Login</v-btn>
+      </v-app-bar-items>
+      <v-app-bar-items v-if="isLoggedIn">
+        <v-btn :to="{ name: 'boards'}">Boards</v-btn>
+        <v-btn @click="logoutAction">Logout</v-btn>
+      </v-app-bar-items>
     </v-app-bar>
     <v-content>
       <router-view/>
@@ -12,9 +24,9 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import api from './api/api';
 
-import { mapActions } from 'vuex';
 export default {
   name: 'App',
   data: () => ({
@@ -27,13 +39,15 @@ export default {
         this.logoutAction();
       } else {
         this.loginAction();
-        this.$router.push('/boards');
       }
 
     }
   },
   methods: {
-    ...mapActions(['loginAction', 'logoutAction'])
+    ...mapActions(['loginAction', 'logoutAction']),
+  },
+  computed: {
+    ...mapGetters(['isLoggedIn'])
   }
 };
 </script>
