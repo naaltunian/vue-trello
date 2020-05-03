@@ -11,6 +11,11 @@ const getters = {
 const actions = {
     getBoards: ({ commit }) => {
         commit('getBoards');
+    },
+    createBoardAction: ({ commit }, title) => {
+        console.log('title in action', title)
+
+        commit('createBoard', title);
     }
 }
 
@@ -18,6 +23,11 @@ const mutations = {
     getBoards: async (state) => {
         const boards = await api.getBoards();
         state.boards = boards;
+    },
+    createBoard: async (state, name) => {
+        const board = await api.createBoard(name);
+
+        state.boards.push(board)
     }
 }
 

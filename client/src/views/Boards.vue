@@ -9,10 +9,11 @@
           indeterminate
           color="primary">
         </v-progress-circular>
+        <createBoardForm />
         <!-- check div styling -->
         <div v-if="!loading" >
             <v-flex sm3 v-for="board in boards" :key="board._id" pa-2>
-            <p :board="board">BOARD</p>
+                <p :board="board">BOARD</p>
             </v-flex>
         </div>
       </v-layout>
@@ -21,10 +22,14 @@
 </template>
 
 <script>
+import CreateBoardForm from '../components/CreateBoardForm';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: "boards",
+    components: {
+        CreateBoardForm
+    },
     data: () => ({
         loading: false
     }),
