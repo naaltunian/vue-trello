@@ -1,3 +1,5 @@
+import router from '../../router/index';
+
 const state = {
     isLoggedIn: false,
 }
@@ -22,6 +24,7 @@ const mutations = {
     logout: (state) => {
         localStorage.removeItem('token');
         state.isLoggedIn = false;
+        router.push('/');
     }
 }
 

@@ -2,17 +2,17 @@
   <v-app>
     <v-app-bar app>
       <router-link style="text-decoration: none; color: inherit;" to="/">
-        <v-app-bar-title>Trello</v-app-bar-title>
+        <v-toolbar-title>Trello</v-toolbar-title>
       </router-link>
       <v-spacer></v-spacer>
-      <v-app-bar-items v-if="!isLoggedIn">
-        <v-btn :to="{ name: 'signup'}">Go Signup</v-btn>
+      <span v-if="!isLoggedIn">
         <v-btn :to="{ name: 'login'}">Go Login</v-btn>
-      </v-app-bar-items>
-      <v-app-bar-items v-if="isLoggedIn">
+        <v-btn :to="{ name: 'signup'}">Go Signup</v-btn>
+      </span>
+      <span v-if="isLoggedIn">
         <v-btn :to="{ name: 'boards'}">Boards</v-btn>
         <v-btn @click="logoutAction">Logout</v-btn>
-      </v-app-bar-items>
+      </span>
     </v-app-bar>
     <v-content>
       <router-view/>

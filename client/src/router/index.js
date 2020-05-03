@@ -4,6 +4,7 @@ import Home from '../views/Home'
 import Signup from '../views/Signup'
 import Login from '../views/Login'
 import Boards from '../views/Boards'
+import store from '../store/index'
 
 Vue.use(VueRouter)
 
@@ -26,7 +27,14 @@ const routes = [
   {
     path: '/boards',
     name: 'boards',
-    component: Boards
+    component: Boards,
+    beforeEnter(to, from, next) {
+      if(store.getters.isLoggedIn) {
+        next();
+      } else {
+        next('/');
+      }
+    }
   }
 ]
 
