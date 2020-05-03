@@ -66,4 +66,17 @@ router.post('/signup', async (req, res) => {
     res.json({ token, username: user.username });
 });
 
+router.post('/check', (req, res) => {
+    const { token } = req.body;
+
+    try {
+        jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+        res.status(422);
+        res.json({ 'message': 'expired' });
+    }
+
+    res.status(200).json({ message: 'good' });
+});
+
 module.exports = router;

@@ -12,21 +12,28 @@
 </template>
 
 <script>
+import api from './api/api';
+
 import { mapActions } from 'vuex';
 export default {
   name: 'App',
   data: () => ({
     fixed: false
   }),
-  mounted() {
-    // TODO: refresh token instead
+  async mounted() {
     if (localStorage.token) {
-      this.loginAction();
-      this.$router.push('/boards');
+      const valid = await api.checkIn();
+      if (!valid) {
+        this.logoutAction();
+      } else {
+        this.loginAction();
+        this.$router.push('/boards');
+      }
+
     }
   },
   methods: {
-    ...mapActions(['loginAction'])
+    ...mapActions(['loginAction', 'logoutAction'])
   }
 };
 </script>
