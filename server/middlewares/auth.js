@@ -6,8 +6,10 @@ function validateJWT(req, res, next) {
     if (authHeader) {
         try {
             const token = authHeader.split(' ')[1];
-            jwt.verify(token, process.env.JWT_SECRET);
+            const validToken = jwt.verify(token, process.env.JWT_SECRET);
+            req.user = validToken;
             next();
+            return;
         } catch (err) {
             res.status(422);
             res.json({ 'message': 'unauthorized' });
