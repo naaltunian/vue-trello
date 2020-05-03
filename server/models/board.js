@@ -7,13 +7,12 @@ const BoardSchema = new mongoose.Schema({
         unique: true
     },
     ownerId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    memberId: {
-        type: String
-        // TODO: add default and set required to true
-    }
+    memberId: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+    }]
 },
 {
     timestamps: true
