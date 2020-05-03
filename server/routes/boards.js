@@ -6,7 +6,7 @@ const router = express.Router();
 // gets all boards associated to owner
 router.get('/', async (req, res) => {
     const boards = await Boards.find({ ownerId: req.user._id });
-
+    
     res.status(200);
     res.json(boards);
 });

@@ -1,5 +1,7 @@
+const baseURL = "http://localhost:5000";
+
 async function checkIn() {
-    const url = "http://localhost:5000/users/check";
+    const url = `${baseURL}/users/check`;
 
     let response = await fetch(url, {
         method: "POST",
@@ -18,6 +20,23 @@ async function checkIn() {
     }
 }
 
+async function getBoards() {
+    const url = `${baseURL}/boards`;
+    
+    let response = await fetch(url, {
+        method: "GET",
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.token}`
+        }
+    });
+
+    let data = await response.json();
+
+    return data;
+}
+
 export default {
-    checkIn
+    checkIn,
+    getBoards
 }
