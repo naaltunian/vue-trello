@@ -30,6 +30,7 @@ export default {
         ...mapActions(['createBoardAction']),
         async createBoard() {
             await this.createBoardAction(this.name);
+            this.name = '';
         }
     }
 }
