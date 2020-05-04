@@ -1,7 +1,9 @@
 <template>
   <v-container fluid>
+    <create-Board-Form />
     <v-slide-y-transition mode="out-in">
-      <v-layout row align-center wrap>
+      <v-row row align-center wrap>
+        <!-- <create-Board-Form /> -->
         <v-progress-circular
           v-if="loading"
           :size="70"
@@ -9,14 +11,10 @@
           indeterminate
           color="primary">
         </v-progress-circular>
-        <createBoardForm />
-        <!-- check div styling -->
-        <div v-if="!loading" >
-            <v-flex sm3 v-for="board in boards" :key="board._id" pa-2>
-                <p :board="board">BOARD</p>
-            </v-flex>
-        </div>
-      </v-layout>
+        <v-col sm3 lg="4" v-for="board in boards" :key="board._id" pa-2>
+          <p :board="board">{{ board.name }}</p>
+        </v-col>
+      </v-row>
     </v-slide-y-transition>
   </v-container>
 </template>
