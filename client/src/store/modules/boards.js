@@ -13,8 +13,6 @@ const actions = {
         commit('getBoards');
     },
     createBoardAction: ({ commit }, title) => {
-        console.log('title in action', title)
-
         commit('createBoard', title);
     }
 }

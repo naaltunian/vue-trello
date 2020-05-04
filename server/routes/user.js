@@ -74,9 +74,11 @@ router.post('/check', (req, res) => {
     } catch (err) {
         res.status(422);
         res.json({ 'message': 'expired' });
+        return;
     }
 
-    res.status(200).json({ message: 'good' });
+    res.json({ message: 'good' });
+    return;
 });
 
 module.exports = router;

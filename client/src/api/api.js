@@ -1,8 +1,10 @@
 const baseURL = "http://localhost:5000";
 
-const authHeaders = {
-    'content-type': 'application/json',
-    'Authorization': `Bearer ${localStorage.token}`
+function authHeaders() {
+    return {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${localStorage.token}`
+    }
 }
 
 async function checkIn() {
@@ -25,10 +27,10 @@ async function checkIn() {
 
 async function getBoards() {
     const url = `${baseURL}/boards`;
-    
+
     let response = await fetch(url, {
         method: "GET",
-        headers: authHeaders
+        headers: authHeaders()
     });
 
     let data = await response.json();
@@ -44,7 +46,6 @@ async function createBoard(name) {
         headers: authHeaders,
         body: JSON.stringify({'name': name})
     });
-    console.log(response);
 
     const data = await response.json();
 

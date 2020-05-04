@@ -2,7 +2,7 @@
   <v-container fluid>
     <create-Board-Form />
     <v-slide-y-transition mode="out-in">
-      <v-row row align-center wrap>
+      <v-row v-if="boards" row align-center wrap>
         <v-progress-circular
           v-if="loading"
           :size="70"
@@ -10,7 +10,7 @@
           indeterminate
           color="primary">
         </v-progress-circular>
-        <v-col no-gutters cols="12" xs="12" sm="12" md="3" lg="4" v-for="board in boards" :key="board._id" pa-2>
+        <v-col no-gutters cols="12" xs="12" sm="12" md="3" lg="4" v-for="board in boards.boards" :key="board._id" pa-2>
           <board-Card :board="board" />
         </v-col>
       </v-row>
@@ -21,7 +21,7 @@
 <script>
 import CreateBoardForm from '../components/CreateBoardForm';
 import BoardCard from '../components/BoardCard'
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
     name: "boards",
@@ -30,16 +30,16 @@ export default {
         BoardCard
     },
     data: () => ({
-        loading: false
+      loading: false
     }),
     methods: {
-        ...mapActions(['getBoards'])
+      ...mapActions(['getBoards'])
     },
-    async mounted() {
-        await this.getBoards();
+    mounted() {
+      this.getBoards();
     },
     computed: {
-        ...mapGetters(['boards'])
+      ...mapState(['boards'])
     }
 }
 </script>

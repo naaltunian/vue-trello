@@ -64,7 +64,7 @@ export default {
                 return;
             }
             
-            localStorage.token = response;
+            localStorage.setItem('token', response)
             this.loginAction();
             this.loading = false;
             this.$router.push('/boards');
