@@ -68,7 +68,7 @@ router.post('/signup', async (req, res) => {
 
 router.post('/check', (req, res) => {
     const { token } = req.body;
-
+    
     try {
         jwt.verify(token, process.env.JWT_SECRET);
     } catch (err) {

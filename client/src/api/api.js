@@ -12,12 +12,12 @@ async function checkIn() {
 
     let response = await fetch(url, {
         method: "POST",
-        headers: authHeaders,
+        headers: authHeaders(),
         body: JSON.stringify({ 'token': localStorage.token })
     });
 
     const data = await response.json();
-
+    console.log(data)
     if (data.message === 'expired') {
         return false;
     } else {
@@ -43,7 +43,7 @@ async function createBoard(name) {
 
     let response = await fetch(url, {
         method: "POST",
-        headers: authHeaders,
+        headers: authHeaders(),
         body: JSON.stringify({'name': name})
     });
 
