@@ -65,9 +65,24 @@ async function createBoard(name) {
     return data;
 }
 
+async function createList(list) {
+    const url = `${baseURL}/list`;
+
+    let response = await fetch(url, {
+        method: "POST",
+        headers: authHeaders(),
+        body: JSON.stringify(list)
+    });
+    
+    const data = await response.json();
+
+    return data;
+}
+
 export default {
     checkIn,
     getBoards,
     createBoard,
-    getBoard
+    getBoard,
+    createList
 }

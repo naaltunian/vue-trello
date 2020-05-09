@@ -10,7 +10,8 @@ const ListSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: 'Board'
     },
     archived: {
-        type: Boolean
+        type: Boolean,
+        default: false
     }
 },
 {

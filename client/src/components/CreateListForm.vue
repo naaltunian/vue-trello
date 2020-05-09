@@ -7,7 +7,7 @@
           @submit.prevent="createList"
         >
           <v-text-field
-            v-model="name"
+            v-model="list.name"
             label="Title"
             required
           ></v-text-field>
@@ -19,18 +19,23 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import api from '../api/api';
 
 export default {
     name: 'createListForm',
-    data: () => ({
-        name: ''
-    }),
+    data() {
+        return {
+            list: {
+                name: '',
+                boardId: this.$route.params.id
+            }
+        }
+    },
     methods: {
-        ...mapActions(['createListAction']),
         async createList() {
-            await this.createListAction(this.name);
-            this.name = '';
+            console.log(this.list);
+            await api.createList(this.list);
+            this.list.name = '';
         }
     }
 }
