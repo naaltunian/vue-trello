@@ -1,7 +1,8 @@
 import api from '../../api/api';
 
 const state = {
-    boards: []
+    boards: [],
+    selectedBoard: {}
 }
 
 const getters = {
@@ -11,9 +12,6 @@ const getters = {
 const actions = {
     getBoards: ({ commit }) => {
         commit('getBoards');
-    },
-    getBoardAction: ({ commit }, id) => {
-        commit('getBoard', id);
     },
     createBoardAction: ({ commit }, title) => {
         commit('createBoard', title);
@@ -29,11 +27,6 @@ const mutations = {
         const board = await api.createBoard(name);
 
         state.boards.push(board)
-    },
-    getBoard: async (state, id) => {
-        const board = await api.getBoard(id);
-        console.log(board)
-        return board;
     }
 }
 

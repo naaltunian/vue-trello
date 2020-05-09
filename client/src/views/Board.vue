@@ -1,8 +1,9 @@
 <template>
     <v-container fluid>
+        <div>{{ board.name }}</div>
         <create-List-Form />
         <v-slide-y-transition mode="out-in">
-            <v-row v-if="boards" row align-center wrap>
+            <v-row v-if="board" row align-center wrap>
                 <v-col no-gutters cols="12" xs="12" sm="12" md="3" lg="4" v-for="list in lists.lists" :key="list._id" pa-2>
                     {{ list.name }}
                 </v-col>
@@ -13,7 +14,7 @@
 
 <script>
 import createListForm from '../components/CreateListForm';
-import { mapActions } from 'vuex';
+import api from '../api/api';
 
 export default {
     name: 'board',
@@ -24,12 +25,9 @@ export default {
     components: {
         createListForm
     },
-    mounted() {
-        const board = this.getBoardAction(this.$route.params.id)
-        this.board = board;
-    },
-    methods: {
-      ...mapActions(['getBoardAction'])
+    async mounted() {
+        const board = await api.getBoard(this.$route.params.id);
+        this.board = board[0];
     }
 }
 </script>
