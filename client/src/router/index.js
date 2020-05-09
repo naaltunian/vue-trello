@@ -4,9 +4,18 @@ import Home from '../views/Home'
 import Signup from '../views/Signup'
 import Login from '../views/Login'
 import Boards from '../views/Boards'
+import Board from '../views/Board'
 import store from '../store/index'
 
 Vue.use(VueRouter)
+
+function loginRouteProtection(to, from, next) {
+  if(store.getters.isLoggedIn) {
+    next();
+  } else {
+    next('/');
+  }
+}
 
 const routes = [
   {
@@ -28,13 +37,13 @@ const routes = [
     path: '/boards',
     name: 'boards',
     component: Boards,
-    beforeEnter(to, from, next) {
-      if(store.getters.isLoggedIn) {
-        next();
-      } else {
-        next('/');
-      }
-    }
+    beforeEnter: loginRouteProtection
+  },
+  {
+    path: '/board/:id',
+    name: 'board',
+    component: Board,
+    beforeEnter: loginRouteProtection
   }
 ]
 

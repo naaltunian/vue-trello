@@ -11,6 +11,19 @@ router.get('/', async (req, res) => {
     res.json(boards);
 });
 
+// gets a single board
+router.get('/:id', async (req, res) => {
+    const board = await Boards.find({ _id: req.params.id });
+
+    if (!board) {
+        res.status(404);
+        return res.json({ 'message': 'board not found' });
+    }
+
+    res.status(200);
+    res.json(board);
+});
+
 // creates a board
 router.post('/', async (req, res) => {
     const { name } = req.body;

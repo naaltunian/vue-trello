@@ -17,7 +17,7 @@ async function checkIn() {
     });
 
     const data = await response.json();
-    console.log(data)
+
     if (data.message === 'expired') {
         return false;
     } else {
@@ -31,6 +31,19 @@ async function getBoards() {
     let response = await fetch(url, {
         method: "GET",
         headers: authHeaders()
+    });
+
+    let data = await response.json();
+
+    return data;
+}
+
+async function getBoard(id) {
+    const url = `${baseURL}/boards/${id}`;
+
+    let response = await fetch(url, {
+        method: "GET",
+        headers: authHeaders(),
     });
 
     let data = await response.json();
@@ -55,5 +68,6 @@ async function createBoard(name) {
 export default {
     checkIn,
     getBoards,
-    createBoard
+    createBoard,
+    getBoard
 }
