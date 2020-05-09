@@ -10,6 +10,10 @@ const BoardSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
+    lists: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'List'
+    }],
     memberId: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
     }]

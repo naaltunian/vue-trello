@@ -73,7 +73,7 @@ async function createList(list) {
         headers: authHeaders(),
         body: JSON.stringify(list)
     });
-    
+
     const data = await response.json();
 
     return data;

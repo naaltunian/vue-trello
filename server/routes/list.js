@@ -1,7 +1,8 @@
 const express = require('express');
-const router = express.Router();
-
 const List = require('../models/list');
+const Boards = require('../models/board');
+
+const router = express.Router();
 
 router.get('/:id', async (req, res) => {
     const list = await List.find({ _id: req.params.id });
@@ -19,6 +20,8 @@ router.post('/', async (req, res) => {
         name,
         boardId
     }).save();
+
+    await Boards.findOneAndUpdate({ _id: boardId }, { $push: { lists: list._id }})
 
     res.status(200).json(list);
 });

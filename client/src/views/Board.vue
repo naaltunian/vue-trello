@@ -1,7 +1,7 @@
 <template>
     <v-container fluid>
         <v-btn color="primary" @click="back">Back</v-btn>
-        <create-List-Form />
+        <create-List-Form :lists="lists" />
         <v-slide-y-transition mode="out-in">
             <v-row v-if="lists" row align-center wrap>
                 <v-col no-gutters cols="12" xs="12" sm="12" md="3" lg="4" v-for="list in lists.lists" :key="list._id" pa-2>
@@ -33,6 +33,10 @@ export default {
         back() {
             this.$router.go(-1);
         }
+    },
+    destroyed() {
+        this.board = {},
+        this.lists = []
     }
 }
 </script>

@@ -21,7 +21,7 @@ app.use('/boards', authMiddleWare.validateJWT, boardRoutes);
 app.use('/list', authMiddleWare.validateJWT, listRoutes);
 
 // db connection
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
     .then(() => console.log('DB connected'))
     .catch(err => console.error(err));
 
