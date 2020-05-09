@@ -4,7 +4,7 @@
     <v-slide-y-transition mode="out-in">
       <v-row v-if="boards" row align-center wrap>
         <v-col no-gutters cols="12" xs="12" sm="12" md="3" lg="4" v-for="board in boards.boards" :key="board._id" pa-2>
-          <board-Card :board="board" />
+          <board-Card class="elevation-3" :board="board" />
         </v-col>
       </v-row>
     </v-slide-y-transition>

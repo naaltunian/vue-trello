@@ -37,9 +37,7 @@ export default {
             console.log(this.list);
             const list = await api.createList(this.list);
             this.list.name = '';
-            console.log("LIST", list);
             this.lists.push(list);
-            console.log(this.lists)
         }
     }
 }
