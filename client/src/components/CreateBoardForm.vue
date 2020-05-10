@@ -29,8 +29,9 @@ export default {
     methods: {
         ...mapActions(['createBoardAction']),
         async createBoard() {
-            await this.createBoardAction(this.name);
-            this.name = '';
+          if (this.name === '') return;
+          await this.createBoardAction(this.name);
+          this.name = '';
         }
     }
 }

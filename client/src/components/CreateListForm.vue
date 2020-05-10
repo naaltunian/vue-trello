@@ -34,10 +34,11 @@ export default {
     props: ['lists'],
     methods: {
         async createList() {
-            console.log(this.list);
-            const list = await api.createList(this.list);
-            this.list.name = '';
-            this.lists.push(list);
+          if (this.list.name === '') return;
+          console.log(this.list);
+          const list = await api.createList(this.list);
+          this.list.name = '';
+          this.lists.push(list);
         }
     }
 }

@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     res.json(boards);
 });
 
-// gets a all boards associated with a user
+// gets a specific board
 router.get('/:id', async (req, res) => {
     const board = await Boards.find({ _id: req.params.id }).populate('lists');
     

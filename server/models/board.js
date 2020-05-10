@@ -16,7 +16,12 @@ const BoardSchema = new mongoose.Schema({
     }],
     memberId: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
-    }]
+    }],
+    status: {
+        type: String,
+        enum: ['backlog', 'in-progress', 'done', 'archived'],
+        default: 'backlog'
+    }
 },
 {
     timestamps: true
